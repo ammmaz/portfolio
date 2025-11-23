@@ -1,26 +1,190 @@
-@import "tailwindcss";
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-slate-950 text-white overflow-x-hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+}
+
+/* Simple animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.floating-sphere {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-sphere {
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* Add to your globals.css */
+.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Locomotive Scroll Styles */
+.has-scroll-smooth {
+  overflow: hidden;
+}
+
+.has-scroll-dragging {
+  user-select: none;
+}
+
+[data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-section] {
+  position: relative;
+}
+
+/* Custom scrollbar */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #0066FF, #00D4FF);
+  border-radius: 4px;
+}
+
+/* Add to globals.css */
+.react-calendar-custom {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+}
+
+.react-calendar-custom .react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+
+.react-calendar-custom .react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.react-calendar-custom .react-calendar__navigation button:hover {
+  background: #334155;
+  border-radius: 8px;
+}
+
+.react-calendar-custom .react-calendar__navigation button:disabled {
+  background: transparent;
+  color: #6b7280;
+}
+
+.react-calendar-custom .react-calendar__month-view__weekdays {
+  text-align: center;
+  color: #9ca3af;
+  font-weight: 500;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+.react-calendar-custom .react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+.react-calendar-custom .react-calendar__month-view__days__day--weekend {
+  color: #ef4444;
+}
+
+.react-calendar-custom .react-calendar__month-view__days__day--neighboringMonth {
+  color: #6b7280;
+}
+
+.react-calendar-custom .react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.react-calendar-custom .react-calendar__tile:enabled:hover,
+.react-calendar-custom .react-calendar__tile:enabled:focus {
+  background-color: #334155;
+}
+
+.react-calendar-custom .react-calendar__tile--now {
+  background: #1e40af;
+  color: white;
+}
+
+.react-calendar-custom .react-calendar__tile--now:enabled:hover,
+.react-calendar-custom .react-calendar__tile--now:enabled:focus {
+  background: #1d4ed8;
+}
+
+.react-calendar-custom .react-calendar__tile--active {
+  background: #00d4ff;
+  color: white;
+}
+
+.react-calendar-custom .react-calendar__tile--active:enabled:hover,
+.react-calendar-custom .react-calendar__tile--active:enabled:focus {
+  background: #06b6d4;
+}
+
+.react-calendar-custom .react-calendar__tile:disabled {
+  background: transparent;
+  color: #6b7280;
+  cursor: not-allowed;
 }
